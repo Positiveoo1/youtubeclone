@@ -1,0 +1,192 @@
+/**
+ * Global Styles
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-dark: #0f0f0f;
+  --color-dark-secondary: #1a1a1a;
+  --color-dark-tertiary: #272727;
+  --color-light: #ffffff;
+  --color-light-secondary: #f9f9f9;
+  --color-light-tertiary: #e5e5e5;
+  --color-accent: #ff0000;
+  --color-text-dark: #ffffff;
+  --color-text-light: #030303;
+  --color-border: #424242;
+  --transition: all 0.3s ease;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.dark,
+body.dark {
+  background-color: var(--color-dark);
+  color: var(--color-text-dark);
+}
+
+html.light,
+body.light {
+  background-color: var(--color-light-secondary);
+  color: var(--color-text-light);
+}
+
+body {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--color-dark);
+  color: var(--color-text-dark);
+  transition: var(--transition);
+}
+
+/* Layout */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-main {
+  display: flex;
+  flex: 1;
+  position: relative;
+  margin-left: 240px;
+  transition: var(--transition);
+}
+
+.layout-content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: 56px;
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 768px) {
+  .layout-main {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .layout-content {
+    padding-top: 56px;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border);
+}
+
+body.light::-webkit-scrollbar-track {
+  background: var(--color-light-secondary);
+}
+
+body.light::-webkit-scrollbar-thumb {
+  background: var(--color-light-tertiary);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+/* Forms */
+input,
+textarea,
+select {
+  background-color: var(--color-dark-secondary);
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-border);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.1);
+}
+
+body.light input,
+body.light textarea,
+body.light select {
+  background-color: var(--color-light);
+  color: var(--color-text-light);
+  border-color: var(--color-light-tertiary);
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .layout-content {
+    padding-top: 48px;
+  }
+}
