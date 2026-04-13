@@ -3,7 +3,7 @@
  * POST /api/auth/login
  */
 
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import UserModel from '@/models/User';
 import { comparePassword } from '@/lib/password';
@@ -65,14 +65,14 @@ export async function POST(request: NextRequest) {
     // Check if it's a MongoDB connection error
     if (error.message?.includes('querySrv') || error.message?.includes('ENOTFOUND') || error.message?.includes('connect')) {
       console.error('Database connection error:', error.message);
-      return {
-        status: 503,
-        json: () => Promise.resolve({
+      return NextResponse.json(
+        {
           success: false,
           error: 'Database connection failed. Please check your MongoDB configuration in .env.local',
           details: 'Unable to connect to MongoDB. Make sure: 1) MONGODB_URI is set correctly, 2) Your IP is whitelisted in MongoDB Atlas, 3) Network has internet access'
-        })
-      };
+        },
+        { status: 503 }
+      );
     }
     return handleApiError(error, 500);
   }

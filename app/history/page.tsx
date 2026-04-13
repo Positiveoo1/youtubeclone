@@ -39,7 +39,7 @@ export default function HistoryPage() {
   const fetchHistory = async () => {
     try {
       setIsLoading(true);
-      const response = await apiClient.get('/history');
+      const response = await apiClient.get<{ history: HistoryItem[] }>('/history');
 
       if (response.success && response.data) {
         setHistory(response.data.history || []);

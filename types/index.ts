@@ -1,9 +1,14 @@
+import { ObjectId } from 'mongodb';
+
+// Helper type for MongoDB documents
+export type MongooseDocument<T> = Omit<T, '_id'> & { _id: ObjectId | string };
+
 // User types
 export interface User {
-  _id: string;
+  _id: string | ObjectId;
   username: string;
   email: string;
-  password?: string;
+  password: string;
   avatar?: string;
   bio?: string;
   verified?: boolean;
@@ -14,7 +19,7 @@ export interface User {
 
 // Video types
 export interface Video {
-  _id: string;
+  _id: string | ObjectId;
   videoId: string;
   title: string;
   description: string;
@@ -33,7 +38,7 @@ export interface Video {
 
 // Comment types
 export interface Comment {
-  _id: string;
+  _id: string | ObjectId;
   videoId: string;
   userId: string;
   username: string;
@@ -47,7 +52,7 @@ export interface Comment {
 
 // Like/Dislike types
 export interface Like {
-  _id: string;
+  _id: string | ObjectId;
   userId: string;
   videoId: string;
   type: 'like' | 'dislike';
@@ -56,7 +61,7 @@ export interface Like {
 
 // Watch History types
 export interface WatchHistory {
-  _id: string;
+  _id: string | ObjectId;
   userId: string;
   videoId: string;
   watchedAt: Date;
@@ -66,7 +71,7 @@ export interface WatchHistory {
 
 // Channel types
 export interface Channel {
-  _id: string;
+  _id: string | ObjectId;
   channelId: string;
   name: string;
   description: string;

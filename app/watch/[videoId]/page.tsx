@@ -10,6 +10,7 @@ import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ThumbsUp, ThumbsDown, Share2, Download } from 'lucide-react';
 import apiClient from '@/services/api-client';
+import { Comment } from '@/types';
 import '../../../styles/watch.css';
 
 interface VideoDetails {
@@ -29,7 +30,7 @@ export default function WatchPage() {
   const [videoDetails, setVideoDetails] = useState<VideoDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [likeStatus, setLikeStatus] = useState<'like' | 'dislike' | null>(null);
-  const [comments, setComments] = useState<any[]>([]);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
@@ -52,7 +53,7 @@ export default function WatchPage() {
         });
 
         // Fetch comments
-        const commentsResponse = await apiClient.get('/comments', {
+        const commentsResponse = await apiClient.get<{ comments: Comment[] }>('/comments', {
           params: { videoId },
         });
         if (commentsResponse.success && commentsResponse.data) {
@@ -74,7 +75,7 @@ export default function WatchPage() {
     if (!newComment.trim()) return;
 
     try {
-      const response = await apiClient.post('/comments', {
+      const response = await apiClient.post<Comment>('/comments', {
         videoId,
         content: newComment,
       });
@@ -252,7 +253,7 @@ export default function WatchPage() {
             ) : (
               comments.map((comment) => (
                 <motion.div
-                  key={comment._id}
+                  key={String(comment._id)}
                   className="watch-comment"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

@@ -4,9 +4,9 @@
  */
 
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import { Comment } from '@/types';
+import { Comment, MongooseDocument } from '@/types';
 
-interface CommentDocument extends Comment, Document {}
+interface CommentDocument extends MongooseDocument<Comment>, Document {}
 
 const CommentSchema = new Schema<CommentDocument>(
   {

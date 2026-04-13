@@ -99,6 +99,22 @@ export function notFoundError(message: string = 'Resource not found') {
 }
 
 /**
+ * Server error response
+ */
+export function serverError(message: string = 'Internal server error', details?: string) {
+  const response: any = {
+    success: false,
+    error: message,
+  };
+
+  if (details) {
+    response.details = details;
+  }
+
+  return NextResponse.json(response, { status: 503 });
+}
+
+/**
  * Success response
  */
 export function successResponse<T>(data: T, message: string = 'Success', status: number = 200) {

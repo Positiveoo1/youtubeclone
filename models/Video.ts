@@ -4,9 +4,9 @@
  */
 
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import { Video } from '@/types';
+import { Video, MongooseDocument } from '@/types';
 
-interface VideoDocument extends Video, Document {}
+interface VideoDocument extends MongooseDocument<Video>, Document {}
 
 const VideoSchema = new Schema<VideoDocument>(
   {
