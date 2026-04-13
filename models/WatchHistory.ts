@@ -4,9 +4,16 @@
  */
 
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import { WatchHistory } from '@/types';
 
-interface WatchHistoryDocument extends WatchHistory, Document {}
+interface WatchHistoryDocument extends Document {
+  userId: mongoose.Types.ObjectId;
+  videoId: string;
+  watchedAt: Date;
+  duration: number;
+  progress: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const WatchHistorySchema = new Schema<WatchHistoryDocument>(
   {

@@ -4,9 +4,14 @@
  */
 
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import { Like, MongooseDocument } from '@/types';
 
-interface LikeDocument extends MongooseDocument<Like>, Document {}
+interface LikeDocument extends Document {
+  userId: mongoose.Types.ObjectId;
+  videoId: string;
+  type: 'like' | 'dislike';
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const LikeSchema = new Schema<LikeDocument>(
   {

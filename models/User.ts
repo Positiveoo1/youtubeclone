@@ -4,9 +4,18 @@
  */
 
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import { User, MongooseDocument } from '@/types';
 
-interface UserDocument extends MongooseDocument<User>, Document {}
+interface UserDocument extends Document {
+  username: string;
+  email: string;
+  password: string;
+  avatar: string | null;
+  bio: string | null;
+  verified: boolean;
+  subscriberCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const UserSchema = new Schema<UserDocument>(
   {

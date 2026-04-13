@@ -4,9 +4,25 @@
  */
 
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import { Video, MongooseDocument } from '@/types';
 
-interface VideoDocument extends MongooseDocument<Video>, Document {}
+interface VideoDocument extends Document {
+  videoId: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  channelId: string;
+  channelName: string;
+  channelAvatar: string | null;
+  viewCount: number;
+  likeCount: number;
+  commentCount: number;
+  uploadDate: Date;
+  duration: number | null;
+  category: string;
+  isHD: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const VideoSchema = new Schema<VideoDocument>(
   {

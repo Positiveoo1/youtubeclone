@@ -55,7 +55,7 @@ class ApiClient {
       const response = await this.client.get<ApiResponse<T>>(url, config);
       return response.data;
     } catch (error) {
-      return this.handleError(error);
+      return this.handleError<T>(error);
     }
   }
 
@@ -67,7 +67,7 @@ class ApiClient {
       const response = await this.client.post<ApiResponse<T>>(url, data, config);
       return response.data;
     } catch (error) {
-      return this.handleError(error);
+      return this.handleError<T>(error);
     }
   }
 
@@ -79,7 +79,7 @@ class ApiClient {
       const response = await this.client.put<ApiResponse<T>>(url, data, config);
       return response.data;
     } catch (error) {
-      return this.handleError(error);
+      return this.handleError<T>(error);
     }
   }
 
@@ -91,7 +91,7 @@ class ApiClient {
       const response = await this.client.delete<ApiResponse<T>>(url, config);
       return response.data;
     } catch (error) {
-      return this.handleError(error);
+      return this.handleError<T>(error);
     }
   }
 
@@ -103,7 +103,7 @@ class ApiClient {
       const response = await this.client.patch<ApiResponse<T>>(url, data, config);
       return response.data;
     } catch (error) {
-      return this.handleError(error);
+      return this.handleError<T>(error);
     }
   }
 
@@ -138,7 +138,7 @@ class ApiClient {
   /**
    * Handle API errors
    */
-  private handleError(error: any): ApiResponse<null> {
+  private handleError<T>(error: any): ApiResponse<T> {
     console.error('API Error:', error);
 
     if (error.response) {

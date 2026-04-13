@@ -4,9 +4,18 @@
  */
 
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import { Comment, MongooseDocument } from '@/types';
 
-interface CommentDocument extends MongooseDocument<Comment>, Document {}
+interface CommentDocument extends Document {
+  videoId: string;
+  userId: mongoose.Types.ObjectId;
+  username: string;
+  userAvatar: string | null;
+  content: string;
+  likes: number;
+  replies: mongoose.Types.ObjectId[];
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const CommentSchema = new Schema<CommentDocument>(
   {
