@@ -7,10 +7,6 @@ import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
-}
-
 interface CachedConnection {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
@@ -22,6 +18,10 @@ let cached: CachedConnection = {
 };
 
 async function dbConnect(): Promise<typeof mongoose> {
+  if (!MONGODB_URI) {
+    throw new Error('MONGODB_URI is not set. Define it in your deployment environment variables or local .env.local file.');
+  }
+
   if (cached.conn) {
     console.log('Using cached MongoDB connection');
     return cached.conn;
@@ -50,7 +50,6 @@ async function dbConnect(): Promise<typeof mongoose> {
   } catch (e) {
     cached.promise = null;
     // Re-throw the error for the caller to handle
-    throw e;
     throw e;
   }
 
